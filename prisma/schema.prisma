@@ -1,0 +1,29 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["mongoDb"]
+}
+
+model users {
+    id       String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    account  String @unique
+    password String
+}
+
+model model {
+    id        String      @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    name      String      @unique
+    density   Float
+    doorTrack doorTrack[]
+}
+
+model doorTrack {
+    id        String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+    opening   Int
+    modelName String
+    model     model  @relation(fields: [modelName], references: [name])
+}
