@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "postinstall": "prisma generate",
     "dev": "nodemon src/index.ts",
     "start": "ts-node -T src/index.ts",
+    "start:frontend": "parcel public/index.html",
     "bundle": "tsc && webpack",
     "seed": "prisma db seed --preview-feature",
     "studio": "prisma studio",
@@ -16,6 +16,7 @@
   "dependencies": {
     "@prisma/client": "^2.29.1",
     "apollo-server-express": "^2.23.0",
+    "colyseus": "^0.14.23",
     "credotlog": "https://github.com/credot-team/credotlog.git",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.10.7",
