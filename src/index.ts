@@ -4,6 +4,7 @@ import path, { join } from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import session from 'express-session';
+import cors from 'cors';
 import { backendSession } from './middleware/session';
 import { account } from './routers/account';
 import { model } from './routers/model';
@@ -19,13 +20,14 @@ declare module 'express-session' {
 
 const app = express();
 
-const staticPath = join(__dirname, '../public');
-console.log(`Using static path '${staticPath}'`);
-app.use(express.static(staticPath));
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+
+const staticPath = join(__dirname, '../public');
+console.log(`Using static path '${staticPath}'`);
+app.use(express.static(staticPath));
 
 app.get('/api/echo', (req, res) => {
   res.json({ env: process.env.NODE_ENV, echo: 'echo' });

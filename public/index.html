@@ -902,6 +902,7 @@ https://bootsnipp.com/snippets/exR5v
       referrerpolicy="no-referrer"
     ></script>
     <script>
+      const currentDomain = document.domain;
       let currentRoomId = '';
       const getRandomInt = (max) => Math.floor(Math.random() * max);
       const photo = [
@@ -932,7 +933,11 @@ https://bootsnipp.com/snippets/exR5v
       setContactProfile(username, myphoto);
 
       let clientPhoto = 'http://emilcarlsson.se/assets/mikeross.png';
-      var client = new Colyseus.Client('ws://localhost:3000');
+      const client = new Colyseus.Client(
+        `ws://${currentDomain === 'localhost' ? 'localhost:3000' : currentDomain}`,
+      );
+      // console.log(currentDomain);
+      // const client = new Colyseus.Client('ws://localhost:3000');
 
       console.log('init client');
       console.log(client);

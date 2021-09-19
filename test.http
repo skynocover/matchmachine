@@ -1,4 +1,5 @@
-@url=http://localhost:3000
+# @url=http://localhost:3000
+@url=https://matchmachine.credot-web.com
 
 ################################################################
 GET {{url}}/api/echo
